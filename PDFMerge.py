@@ -10,16 +10,6 @@ from APDFTool import APDFTool
 APP_TITLE = u'PDF Document Merge Tool'
 APP_ICON = 'pdf_maker.ico'
 
-class MyLogHandler(logging.Handler):
-    def __init__(self,obj):
-        logging.Handler.__init__(self);
-        self.Object = obj;
-
-    def emit(self,record):
-        if record.levelno<self.level: return;
-        tstr = time.strftime('%Y-%m-%d_%H:%M:%S.%U');
-        self.Object.AppendText("[%s][%s] %s\\n"%(tstr,record.levelname,record.getMessage()));
-
 class mainFrame(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, -1, APP_TITLE, style=wx.DEFAULT_FRAME_STYLE ^ wx.RESIZE_BORDER)
