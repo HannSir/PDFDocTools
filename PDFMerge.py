@@ -100,10 +100,24 @@ class mainFrame(wx.Frame):
         for i in range(rowsCount):
              files.append(self.infoTable.GetValue(i, 1))
         if len(files):
+            self.saveFile()
             tool = APDFTool(files)
             pageCount = tool.getTotalPageCount()
             self.gauge.SetRange(pageCount)
-            tool.merge("output", SetUageValue)
+            tool.merge(self.save_pdf_path, SetUageValue)
+
+    def saveFile(self):
+        file_wildcard = "PDF files(*.pdf)|*.pdf" 
+        dlg = wx.FileDialog(self, "Choose PDF files to merge...",
+                            os.getcwd(), 
+                            style = wx.FD_SAVE,
+                            wildcard = file_wildcard)
+        if dlg.ShowModal() == wx.ID_OK:
+            paths = dlg.GetPaths()
+            for path in paths:
+                self.save_pdf_path = path
+            
+        dlg.Destroy()
 
     def OpenFiles(self, evt):
         '''

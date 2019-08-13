@@ -59,7 +59,7 @@ class APDFTool:
                 processCount = processCount + pageIndex + 1
                 callback(processCount)
 
-        writer.write(open(name+'.pdf', 'wb'))
+        writer.write(open(name, 'wb'))
 
     def toImages(self):
         if self.files is None or len(self.files) == 0:
